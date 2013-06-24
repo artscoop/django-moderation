@@ -1,5 +1,9 @@
 from django.conf import settings
-from django.contrib.auth.models import User
+try:
+        from django.contrib.auth import get_user_model
+        User = get_user_model()
+except:
+        from django.contrib.auth.models import User
 from django.contrib.contenttypes import generic
 from django.contrib.contenttypes.models import ContentType
 from django.db import models
@@ -50,7 +54,7 @@ class ModeratedObject(models.Model):
         default=MODERATION_STATUS_PENDING,
         editable=False)
     moderated_by = models.ForeignKey(
-        User, blank=True, null=True,
+        settings.AUTH_USER_MODEL, blank=True, null=True,
         editable=False, related_name='moderated_by_set')
     moderation_date = models.DateTimeField(editable=False, blank=True,
                                            null=True)
@@ -58,7 +62,7 @@ class ModeratedObject(models.Model):
     changed_object = SerializedObjectField(serialize_format='json',
                                            editable=False)
     changed_by = models.ForeignKey(
-        User, blank=True, null=True,
+        settings.AUTH_USER_MODEL, blank=True, null=True,
         editable=True, related_name='changed_by_set')
 
     objects = ModeratedObjectManager()
