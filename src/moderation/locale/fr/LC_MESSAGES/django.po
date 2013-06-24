@@ -1,0 +1,108 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# 
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-06-24 16:00+0200\n"
+"PO-Revision-Date: 2013-06-24 16:05+0009\n"
+"Last-Translator: Anonymous User <steve@localhost.local>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: \n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Translated-Using: django-rosetta 0.7.2\n"
+
+#: admin.py:82
+msgid "Object is viewable on site, it will be removed if moderator rejects it"
+msgstr ""
+"L'objet est visible sur le site, mais sera supprimé si un modérateur le "
+"refuse"
+
+#: admin.py:85
+msgid ""
+"Object is not viewable on site, it will be visible if moderator accepts it"
+msgstr ""
+"L'objet n'est pas visible sur le site, et sera rendu visible si un "
+"modérateur l'accepte"
+
+#: admin.py:88
+#, python-format
+msgid "Object has been rejected by moderator, reason: %s"
+msgstr "L'objet a été refusé par un modérateur avec la raison suivante : %s"
+
+#: admin.py:91
+msgid "Object has been approved by moderator and is visible on site"
+msgstr ""
+"L'objet a été approuvé par un modérateur et est désormais visible sur le "
+"site"
+
+#: admin.py:94
+msgid "This object is not registered with the moderation system."
+msgstr "Cet objet n'a pas été intégré au processus de modération."
+
+#: filterspecs.py:53
+msgid "All"
+msgstr "Tout"
+
+#: models.py:32
+msgid "Ready for moderation"
+msgstr "Prêt à modérer"
+
+#: models.py:33
+msgid "Draft"
+msgstr "Brouillon"
+
+#: models.py:37
+msgid "Approved"
+msgstr "Approuvé"
+
+#: models.py:38
+msgid "Pending"
+msgstr "En attente"
+
+#: models.py:39
+msgid "Rejected"
+msgstr "Refusé"
+
+#: models.py:53
+msgid "State"
+msgstr "État"
+
+#: models.py:57
+msgid "Status"
+msgstr "Statut"
+
+#: models.py:60
+msgid "Moderator"
+msgstr "Modérateur"
+
+#: models.py:62
+msgid "Date"
+msgstr "Date"
+
+#: models.py:63
+msgid "Approval details"
+msgstr "Détails de modération"
+
+#: models.py:65
+msgid "Changed object"
+msgstr "Objet modifié"
+
+#: models.py:68
+msgid "Editor"
+msgstr "Éditeur"
+
+#: templates/moderation/moderate_object.html:28
+msgid "Change object"
+msgstr "Modifier l'objet"
+
+#: templates/moderation/moderated_objects_list.html:4
+msgid "Select object to moderate"
+msgstr "Sélectionner un objet à modérer"
