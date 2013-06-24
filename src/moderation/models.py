@@ -13,6 +13,8 @@ from moderation.fields import SerializedObjectField
 from moderation.signals import post_moderation, pre_moderation
 from moderation.managers import ModeratedObjectManager
 
+from django.utils.translation import ugettext_lazy as _
+
 import datetime
 
 # Register new ContentTypeFilterSpec
@@ -27,14 +29,14 @@ MODERATION_STATUS_APPROVED = 1
 MODERATION_STATUS_PENDING = 2
 
 MODERATION_STATES = (
-        (MODERATION_READY_STATE, 'Ready for moderation'),
-        (MODERATION_DRAFT_STATE, 'Draft'),
+        (MODERATION_READY_STATE, _(u'Ready for moderation')),
+        (MODERATION_DRAFT_STATE, _(u'Draft')),
     )
 
 STATUS_CHOICES = (
-        (MODERATION_STATUS_APPROVED, "Approved"),
-        (MODERATION_STATUS_PENDING, "Pending"),
-        (MODERATION_STATUS_REJECTED, "Rejected"),
+        (MODERATION_STATUS_APPROVED, _(u"Approved")),
+        (MODERATION_STATUS_PENDING, _(u"Pending")),
+        (MODERATION_STATUS_REJECTED, _(u"Rejected")),
     )
 
 
@@ -48,22 +50,22 @@ class ModeratedObject(models.Model):
     date_created = models.DateTimeField(auto_now_add=True, editable=False)
     moderation_state = models.SmallIntegerField(choices=MODERATION_STATES,
                                                 default=MODERATION_READY_STATE,
-                                                editable=False)
+                                                editable=False, verbose_name=_(u"State"))
     moderation_status = models.SmallIntegerField(
         choices=STATUS_CHOICES,
         default=MODERATION_STATUS_PENDING,
-        editable=False)
+        editable=False, verbose_name=_(u"Status"))
     moderated_by = models.ForeignKey(
         settings.AUTH_USER_MODEL, blank=True, null=True,
-        editable=False, related_name='moderated_by_set')
+        editable=False, related_name='moderated_by_set', verbose_name=_(u"Moderator"))
     moderation_date = models.DateTimeField(editable=False, blank=True,
-                                           null=True)
-    moderation_reason = models.TextField(blank=True, null=True)
+                                           null=True, verbose_name=_(u"Date"))
+    moderation_reason = models.TextField(blank=True, null=True, verbose_name=_(u"Approval details"))
     changed_object = SerializedObjectField(serialize_format='json',
-                                           editable=False)
+                                           editable=False, verbose_name=_(u"Changed object"))
     changed_by = models.ForeignKey(
         settings.AUTH_USER_MODEL, blank=True, null=True,
-        editable=True, related_name='changed_by_set')
+        editable=True, related_name='changed_by_set', verbose_name=_(u"Editor"))
 
     objects = ModeratedObjectManager()
 
