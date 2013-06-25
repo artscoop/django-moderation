@@ -50,21 +50,22 @@ class SerializedObjectField(models.TextField):
         obj_generator = serializers.deserialize(self.serialize_format,
                                        value.encode(settings.DEFAULT_CHARSET))
 
-        obj = obj_generator.next().object
-        for parent in obj_generator:
-            for f in parent.object._meta.fields:
-                try:
-                    setattr(obj, f.name, getattr(parent.object, f.name))
-                except ObjectDoesNotExist:
+        try:
+            obj = obj_generator.next().object
+            for parent in obj_generator:
+                for f in parent.object._meta.fields:
                     try:
-                        # Try to set non-existant foreign key reference to None
-                        setattr(obj, f.name, None)
-                    except ValueError:
-                        # Return None for changed_object if None not allowed
-                        return None
-                except:
-                    pass
-        return obj
+                        setattr(obj, f.name, getattr(parent.object, f.name))
+                    except ObjectDoesNotExist:
+                        try:
+                            # Try to set non-existant foreign key reference to None
+                            setattr(obj, f.name, None)
+                        except ValueError:
+                            # Return None for changed_object if None not allowed
+                            return None
+            return obj
+        except:
+            pass
 
     def db_type(self, connection=None):
         return 'text'
