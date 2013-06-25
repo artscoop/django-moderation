@@ -62,6 +62,8 @@ class SerializedObjectField(models.TextField):
                     except ValueError:
                         # Return None for changed_object if None not allowed
                         return None
+                except:
+                    pass
         return obj
 
     def db_type(self, connection=None):
