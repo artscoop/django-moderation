@@ -3,16 +3,10 @@ from django.contrib.contenttypes.models import ContentType
 from django.core.exceptions import ObjectDoesNotExist
 
 
-class MetaClass(type):
-
-    def __new__(cls, name, bases, attrs):
-        return super(MetaClass, cls).__new__(cls, name, bases, attrs)
-
-
 class ModerationObjectsManager(Manager):
 
     def __call__(self, base_manager, *args, **kwargs):
-        return MetaClass(self.__class__.__name__,
+        return type(self.__class__.__name__,
                 (self.__class__, base_manager),
                 {'use_for_related_fields': True})
 
