@@ -100,6 +100,10 @@ class ModerationAdmin(admin.ModelAdmin):
 
             class Meta:
                 model = model_class
+        
+        for fieldcopy in ['fields', 'exclude', 'widgets', 'formfield_overrides']:
+            if hasattr(self.form.Meta, fieldcopy):
+                setattr(ModeratedObjectForm.Meta, fieldcopy, getattr(self.form.Meta, fieldcopy))
 
         return ModeratedObjectForm
 
