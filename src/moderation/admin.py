@@ -104,6 +104,11 @@ class ModerationAdmin(admin.ModelAdmin):
         for fieldcopy in ['fields', 'exclude', 'widgets', 'formfield_overrides']:
             if hasattr(self.form.Meta, fieldcopy):
                 setattr(ModeratedObjectForm.Meta, fieldcopy, getattr(self.form.Meta, fieldcopy))
+        if hasattr(self.form, 'declared_fields'):
+            ModeratedObjectForm.declared_fields = self.form.declared_fields
+        if hasattr(self.form, 'base_fields'):
+            ModeratedObjectForm.base_fields = self.form.base_fields
+
 
         return ModeratedObjectForm
 
