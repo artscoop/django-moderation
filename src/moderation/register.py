@@ -203,7 +203,7 @@ class ModerationManager(object):
         pk = instance.pk
         moderator = self.get_moderator(sender)
 
-        if kwargs['created']:
+        if kwargs['created'] and not ModeratedObject.objects.exists_for_instance(instance):
             old_object = sender._default_manager.get(pk=pk)
             moderated_obj = ModeratedObject(content_object=old_object)
             moderated_obj.save()
