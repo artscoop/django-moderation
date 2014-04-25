@@ -69,6 +69,11 @@ class ModerationObjectsManager(Manager):
 
 
 class ModeratedObjectManager(Manager):
+    
+    def exists_for_instance(self, instance):
+        return self.filter(
+            object_pk=instance.pk,
+            content_type=ContentType.objects.get_for_model(instance.__class__)).exists()
 
     def get_for_instance(self, instance):
         '''Returns ModeratedObject for given model instance'''
