@@ -28,6 +28,8 @@ def import_moderator(app):
         app_path = import_module(app).__path__
     except AttributeError:
         return None
+    except ImportError:
+        return None
 
     try:
         imp.find_module('moderator', app_path)
