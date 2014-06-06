@@ -33,8 +33,11 @@ def import_moderator(app):
         imp.find_module('moderator', app_path)
     except ImportError:
         return None
-
-    module = import_module("%s.moderator" % app)
+        
+    try:
+        module = import_module("%s.moderator" % app)
+    except ImportError:
+        return None
 
     return module
 
